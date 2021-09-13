@@ -1,8 +1,6 @@
 #include "IntervalTreeMerge.h"
 void intervalTree::destoryMemory() {
-  std::cout << "===========" << std::endl;
   std::queue<intervalTree *> q;
-  // std::cout << headNode << std::endl;
   if (this != nullptr) {
     q.push(this);
   }
@@ -10,13 +8,14 @@ void intervalTree::destoryMemory() {
   while (!q.empty()) {
     auto it = q.front();
     q.pop();
-    std::cout << "Destory " << (it->_L) << ' ' << (it->_R) << std::endl;
+    // std::cout << "Destory " << (it->_L) << ' ' << (it->_R) << std::endl;
     if (it->leftSon != nullptr) {
       q.push(it->leftSon);
     }
     if (it->rightSon != nullptr) {
       q.push(it->rightSon);
     }
+    std::cout << "===========" << std::endl;
     delete it;
   }
 }
@@ -26,8 +25,8 @@ void intervalTree::createIntervalTree(intervalTree *intervalnode, int val,
   intervalnode->_L = l;
   intervalnode->_R = r;
   intervalnode->_sum++;
-  std::cout << "Create " << intervalnode->_L << ' ' << intervalnode->_R
-            << std::endl;
+  // std::cout << "Create " << intervalnode->_L << ' ' << intervalnode->_R
+  //<< std::endl;
   if (l == r) {
     return;
   }
@@ -38,5 +37,33 @@ void intervalTree::createIntervalTree(intervalTree *intervalnode, int val,
   } else {
     intervalnode->rightSon = this->_insertNewNode();
     createIntervalTree(intervalnode->rightSon, val, MID + 1, r);
+  }
+}
+void intervalTree::prFirstorder(intervalTree *root) {
+  if (root == nullptr) {
+    return;
+  }
+  std::cout << "firstfor " << root->_L << ' ' << root->_R << std::endl;
+  prFirstorder(root->leftSon);
+  prFirstorder(root->rightSon);
+}
+void mergeIntervalTree::merge(intervalTree *rf, intervalTree *rs) {
+  rf->_sum += rs->_sum;
+  if (rs->leftSon != nullptr) {
+    if (rf->leftSon != nullptr) {
+      merge(rf->leftSon, rs->leftSon);
+    } else {
+      rf->leftSon = new intervalTree();
+      rf->leftSon = rs->leftSon;
+      return;
+    }
+  } else {
+    if (rf->rightSon != nullptr) {
+      merge(rf->rightSon, rs->rightSon);
+    } else {
+      rf->rightSon = new intervalTree();
+      rf->rightSon = rs->rightSon;
+      return;
+    }
   }
 }

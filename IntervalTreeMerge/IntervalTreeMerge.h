@@ -14,9 +14,19 @@ class intervalTree {
 
   void createIntervalTree(intervalTree *intervalNode, int val, int l, int r);
   void destoryMemory();
+  void prFirstorder(intervalTree *root);
   intervalTree *rightSon;
   intervalTree *leftSon;
   bool isHeadNode;
   int _L, _R, _sum;
+};
+
+class mergeIntervalTree {
+ public:
+  int mergeNums;
+  intervalTree *intervalTreeRoot;
+  mergeIntervalTree(intervalTree *root) :intervalTreeRoot(root) {}
+  ~mergeIntervalTree() {}
+  void merge(intervalTree *rf, intervalTree *rs);
 };
 #endif
