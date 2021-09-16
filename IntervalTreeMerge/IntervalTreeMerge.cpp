@@ -95,7 +95,6 @@ void mergeIntervalTree::merge(intervalTree *rf, intervalTree *rs) {
     } else {
       rf->leftSon = new intervalTree();
       rf->leftSon = rs->leftSon;
-      return;
     }
   }
 
@@ -105,7 +104,6 @@ void mergeIntervalTree::merge(intervalTree *rf, intervalTree *rs) {
     } else {
       rf->rightSon = new intervalTree();
       rf->rightSon = rs->rightSon;
-      return;
     }
   }
 }
