@@ -153,10 +153,7 @@ void GetFillArea::prepareData(std::vector<std::vector<int>>& matrix) {
   }
   sort(line.begin(), line.end());
   sort(_axis.begin(), _axis.end());
-  _axis.erase(unique(_axis.begin(), _axis.end()), _axis.end());
-  for (auto a : line) {
-    std::cout << a.x << ' ' << a.ty << ' ' << a.dy << ' ' << a.fla << std::endl;
-  }
+
 }
 
 void GetFillArea::pushUp(int k) {
@@ -213,8 +210,7 @@ int GetFillArea::getFillArea() {
 
 int Soultion::getViewArea(std::vector<std::vector<int>>& Matrix, int x, int y) {
   std::shared_ptr<Windows> windows = std::make_shared<Windows>(Matrix.size());
-  std::shared_ptr<GetFillArea> getfill =
-      std::make_shared<GetFillArea>(Matrix.size());
+  std::shared_ptr<GetFillArea> getfill = std::make_shared<GetFillArea>();
   for (auto pos : Matrix) {
     windows->insertCoordinate(pos[0], pos[1], pos[2], pos[3]);
   }
